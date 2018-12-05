@@ -212,6 +212,65 @@
       <div class="container text-center">
         <h2 class="mb-4">Horários</h2>
         
+        <div id="table-hour"></div>                    
+        <script>
+          (function(document) {
+            'use strict';
+              var table = {
+                  'dias': ['Segunda','Ter&ccedil;a','Quarta','Quinta','Sexta','S&aacute;bado'],
+                  '06:30 - 07:30': ['Jiu-Jitsu','Jiu-Jitsu','Jiu-Jitsu','Jiu-Jitsu','',''],
+                  '07:30 - 09:00': ['','','','','','Hapkido'],
+                  '08:00 - 09:00': ['','Boxe','Boxe','Boxe','',''],
+                  '08:20 - 09:20': ['Jiu-Jitsu','','','','',''],
+                  '09:00 - 10:30': ['','','','','','Jiu-Jitsu'],
+                  '10:30 - 11:30': ['','Jiu-Jitsu (Kids)','Jiu-Jitsu (Kids)','','Jiu-Jitsu (Kids)','Muay Thai'],
+                  '13:00 - 14:00': ['','','','','','Boxe'],
+                  '18:30 - 19:30': ['Muay Thai','Muay Thai','Funcional','Muay Thai','',''],
+                  '19:30 - 20:30': ['Jiu-Jitsu','Jiu-Jitsu','','Jiu-Jitsu','Jiu-Jitsu',''],
+                  '20:30 - 21:30': ['Boxe','','Boxe','','Boxe',''],
+                  '21:00 - 22:00': ['','Jiu-Jitsu','','Jiu-Jitsu','',''],
+                  '22:00 - 23:30': ['Hapkido','','Hapkido','Hapkido','','']
+              }
+          
+              var createTableHtml = function createTableHtml(_table) {
+                  var html = '';
+                  for (var line in _table) {
+                      console.log('line', line);
+                      
+                      html += line === 'dias'
+                          ? createHeader(line, table[line])
+                          : createLine(line, table[line])
+                  }
+                  return '<table class="table">' + html + '</table>';
+              }
+          
+              var createHeader = function createHeader(label, cels) {
+                  var line = cels.map(function(cel){
+                          return '<th>' + cel + '</th>';
+                      }).join('');
+                  return '<thead><tr><th></th>' + line + '</tr></thead>';
+              }
+          
+              var createLine = function createLine(label, cels) {
+                  var line = cels.map(function(cel){
+                          return '<td>' + cel + '</td>';
+                      }).join('');
+          
+                  return '<tr><th>' + label + '</th>' + line + '</tr>';
+              }
+          
+              var createTable = function createTable() {
+                  var tableElement = document.getElementById('table-hour');
+                  
+                  var tableHtml = createTableHtml(table);
+                  console.log('tableHour', tableElement, table, tableHtml);
+                  tableElement.innerHTML = tableHtml;
+              }
+          
+              createTable();
+          
+          })(document);
+        </script>
       </div>
     </section>
 
